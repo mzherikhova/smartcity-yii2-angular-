@@ -1,0 +1,30 @@
+<div>
+    <h1>Редактирование заказа</h1>
+ 
+    <p>{{ message}}</p>
+    <form role="form" name="myForm">
+        <form role="form" name="myForm">
+        <div class= "form-group" ng-class="{error: myForm.user_id.$invalid}">
+            <label> Клиент </label>
+            <div>  
+                             
+                <select ng-model="order.user_id"  class= "form-control">
+                    <option ng-repeat="(id,text) in users" value="{{id}}">{{text}}</option> 
+                </select>
+                <span ng-show="myForm.title.$dirty && myForm.title.$invalid" class="help-inline">Клиент обязательно</span>
+            </div>
+        </div>        
+        <div class= "form-group" ng-class="{error: myForm.price.$invalid}">
+            <label> Цена </label>
+            <div>
+                <input name="price" ng-model="order.price" type= "text" class= "form-control" placeholder="Цена" required/ >
+                <!--<span ng-show="myForm.director.$dirty && myForm.director.$invalid" class="help-inline">Режиссер обязателен</span>-->
+            </div>
+        </div>
+ 
+        <a href="#/film/index" class="btn btn-default">Cancel</a> 
+        <button ng-click="updateOrder(order);" 
+                ng-disabled="isClean() || myForm.$invalid"
+                type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

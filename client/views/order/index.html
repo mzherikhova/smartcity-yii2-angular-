@@ -1,0 +1,54 @@
+<div>
+    <h1>Заказы</h1>    
+    <p>{{ message}}</p>
+    <h4>DatePicker</h4>
+    <div class="row">
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate"  ng-change="changeSelect(dt)" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    <pre>{{changeDate}}   
+    </pre>
+    <a class="btn btn-primary" href="/#!/order/create" ng-hide="!isAdmin()">
+            <i class="glyphicon glyphicon-plus"></i> Добавить
+        </a>
+    <div ng-show="orders.length > 0">
+        
+        <table class="table table-striped table-hover">
+            <thead>
+            <th>id</th>
+            <th>user_id</th>
+            <th>price</th>
+            <th>status</th>
+            <th>created_at</th>
+            <th style="width:80px;">Действия&nbsp;</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in orders | filter: {created_at:changeDate}">
+                    <td>{{data.id}}</td>
+                    <td>{{data.user_id}}</td>
+                    <td>{{data.price}}</td>
+                    <td>{{data.status}}</td>
+                    <td>{{data.created_at}}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="/#!/order/update/{{data.id}}" ng-hide="!isAdmin()">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a> 
+                        <a class="btn btn-danger btn-xs" ng-click="deleteOrder(data.id)" ng-hide="!isAdmin()">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="orders.length == 0">
+        Заказов нет
+    </div>
+</div>

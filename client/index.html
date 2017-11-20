@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="yii2AngApp">
+<head>
+<meta charset="UTF-8">
+ <!-- CSS -->
+ <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="index">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Одностраничное приложение</a>
+            </div>      
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#!/site/index"><i class="glyphicon glyphicon-home"></i> Главная</a></li>
+                <li data-match-route="/order" ng-show="loggedIn()" class="ng-hide">
+                    <a href="/#!/order/index">Заказы</a>
+                </li>
+                <li ng-class="{active:isActive('/logout')}" ng-show="loggedIn()" ng-click="logout()"  class="ng-hide">
+                    <a href="">Logout</a>
+                </li>
+                <li data-match-route="/site/login" ng-hide="loggedIn()">
+                    <a href="/#!/site/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="main" class="container"> 
+        <!-- Здесь будет динамическое содержимое -->
+        <div ng-view></div>    
+    </div>
+ 
+    <footer class="text-center">
+        <p>Работает на Yii 2 и AngularJs 1.6.6</p>
+    </footer>
+ <!-- JS -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.min.js"></script>
+ <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.1/moment.js"></script>
+  <!-- Подключаем модули приложения -->
+  <script src="app.js"></script>
+  <script src="controllers/site.js"></script>  
+  <script src="models/order.js"></script>
+  <script src="controllers/order.js"></script> 
+</body>
